@@ -7,7 +7,7 @@ public class OmokBoardDrawer : MonoBehaviour
     public GameObject cellPrefab;  // ¼¿ ÇÁ¸®ÆÕ
     public int boardSize = 13;     // ¿À¸ñÆÇ Å©±â
     public float cellSize = 1.0f; // ¼¿ Å©±â
-
+    public GameObject BasePrefab;
     public OmokCell[,] cells; // ¿À¸ñÆÇ ¼¿ ¹è¿­
 
     void Start()
