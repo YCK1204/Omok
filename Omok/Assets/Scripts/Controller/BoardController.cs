@@ -21,6 +21,7 @@ public class BoardController : MonoBehaviour
     public Cells[] cells;
     public Stone BlackStone;
     public Stone WhiteStone;
+    public Stone ForbiddenStone;
     int[,] Directions = new int[,]
     {
     { 0, 1 },  // ¡æ
@@ -63,7 +64,10 @@ public class BoardController : MonoBehaviour
                 var cell = hit.collider.GetComponent<OmokCell>();
 
                 if (CanPlace(cell.y, cell.x))
+                {
                     cell.PlaceStone(BlackStone);
+                    UpdateBoard();
+                }
             }
         }
 #endif
@@ -86,7 +90,7 @@ public class BoardController : MonoBehaviour
                 nx += dx;
                 ny += dy;
             }
-            else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE)
+            else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE || cells[ny][nx].GetStoneType == Define.StoneType.FORBIDDEN)
             {
                 if (!firstBlank)
                 {
@@ -116,7 +120,7 @@ public class BoardController : MonoBehaviour
                 nx -= dx;
                 ny -= dy;
             }
-            else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE)
+            else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE || cells[ny][nx].GetStoneType == Define.StoneType.FORBIDDEN)
             {
                 if (!firstBlank)
                 {
@@ -169,6 +173,8 @@ public class BoardController : MonoBehaviour
         bool is4 = false;
         int max = 0;
 
+        if (Check33(y, x) == true)
+            ret = Define.OmokPlaceType.DOUBLE_THREE;
         for (int i = 0; i < len; i++)
         {
             int dx = Directions[i, 1];
@@ -205,17 +211,17 @@ public class BoardController : MonoBehaviour
         }
         return ret;
     }
-    bool CanPlace(int y, int x)
+    bool CanPlace(int y, int x, bool update = false)
     {
-        var placeType = GetOmokPlaceType(y, x);
-        Debug.Log(placeType);
-        if (placeType == Define.OmokPlaceType.FIVE)
-            return true;
-        if (placeType != Define.OmokPlaceType.VALID)
-            return false;
-        if (Check33(y, x) == true)
-            return false;
-        return true;
+        if (cells[y][x].GetStoneType == Define.StoneType.NONE || (update == true && cells[y][x].GetStoneType == Define.StoneType.FORBIDDEN))
+        {
+            var placeType = GetOmokPlaceType(y, x);
+            if (placeType == Define.OmokPlaceType.FIVE)
+                return true;
+            if (placeType == Define.OmokPlaceType.VALID)
+                return true;
+        }
+        return false;
     }
     bool Check33(int y, int x)
     {
@@ -231,9 +237,24 @@ public class BoardController : MonoBehaviour
         }
         return count > 1;
     }
-    //bool Check44(int y, int x)
-    //{
-
-    //}
     bool InBoard(int y, int x) { return (0 <= y && y < 13 && 0 <= x && x < 13); }
+    void UpdateBoard()
+    {
+        for (int y = 0; y < 13; y++)
+        {
+            for (int x = 0; x < 13; x++)
+            {
+                if (cells[y][x].GetStoneType == Define.StoneType.NONE)
+                {
+                    if (CanPlace(y, x, true) == false)
+                        cells[y][x].PlaceStone(ForbiddenStone);
+                }
+                else if (cells[y][x].GetStoneType == Define.StoneType.FORBIDDEN)
+                {
+                    if (CanPlace(y, x, true) == true)
+                        cells[y][x].PlaceStone(null);
+                }
+            }
+        }
+    }
 }

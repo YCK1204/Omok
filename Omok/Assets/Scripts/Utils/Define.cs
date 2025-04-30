@@ -6,7 +6,8 @@ namespace Define
     {
         NONE,
         WHITE,
-        BLACK
+        BLACK,
+        FORBIDDEN
     }
     public enum OmokPlaceType
     {

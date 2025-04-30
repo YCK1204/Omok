@@ -17,8 +17,16 @@ public class OmokCell : MonoBehaviour
     }
     public void PlaceStone(Stone stonePrefab)
     {
-        if (Stone != null) return;
+        if (stonePrefab == null) // ±ÝÁö ¾ø¾Ú
+        {
+            GameObject.Destroy(Stone.gameObject);
+        }
+        else // ¾Æ¹«°Å³ª »ý±è
+        {
+            if (GetStoneType == stonePrefab.StoneType)
+                return;
+            Stone = Instantiate(stonePrefab, transform.position, Quaternion.identity, transform);
+        }
 
-        Stone = Instantiate(stonePrefab, transform.position, Quaternion.identity, transform);
     }
 }

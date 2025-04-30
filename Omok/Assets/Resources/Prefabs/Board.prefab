@@ -19808,6 +19808,7 @@ MonoBehaviour:
     - {fileID: 5516288528629233298}
   BlackStone: {fileID: -8873611463760455781, guid: ec511efd683946e4ab97064319a0aacf, type: 3}
   WhiteStone: {fileID: 4644674088375341546, guid: 4690ad959fd9dfa42b9f02b1e5de79ce, type: 3}
+  ForbiddenStone: {fileID: 4644674088375341546, guid: 74b25bce4c6d25543bb649bfe9dac4bb, type: 3}
 --- !u!1 &9161270832333257736
 GameObject:
   m_ObjectHideFlags: 0
