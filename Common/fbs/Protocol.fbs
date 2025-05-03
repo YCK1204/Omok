@@ -1,0 +1,9 @@
+table PKT_C_Test {
+}
+table PKT_S_Test {
+}
+
+enum PKT_Type : uint8 {
+	PKT_S_Test,
+	PKT_C_Test,
+}

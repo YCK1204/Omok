@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmokServer", "OmokServer\OmokServer.csproj", "{F220DDC4-6D11-497A-9565-4936FCC311BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerCore", "ServerCore\ServerCore.csproj", "{527199F8-FF46-4D6A-AF38-F7A2FECAE248}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacketGenerator", "PacketGenerator\PacketGenerator.csproj", "{F464AE34-4E1D-4604-9688-6122B3FB0A0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F220DDC4-6D11-497A-9565-4936FCC311BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F220DDC4-6D11-497A-9565-4936FCC311BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F220DDC4-6D11-497A-9565-4936FCC311BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F220DDC4-6D11-497A-9565-4936FCC311BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{527199F8-FF46-4D6A-AF38-F7A2FECAE248}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{527199F8-FF46-4D6A-AF38-F7A2FECAE248}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{527199F8-FF46-4D6A-AF38-F7A2FECAE248}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{527199F8-FF46-4D6A-AF38-F7A2FECAE248}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F464AE34-4E1D-4604-9688-6122B3FB0A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F464AE34-4E1D-4604-9688-6122B3FB0A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F464AE34-4E1D-4604-9688-6122B3FB0A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F464AE34-4E1D-4604-9688-6122B3FB0A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
