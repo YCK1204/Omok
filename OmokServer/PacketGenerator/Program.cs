@@ -40,11 +40,11 @@ namespace PacketGenerator
 
                             if (line.StartsWith("PKT_S_"))
                             {
-                                clientRegister += String.Format(PacketFormat_CSharp.PMRegister, line) + "\n\t\t";
+                                serverRegister += String.Format(PacketFormat_CSharp.PMRegister, line) + "\n\t\t";
                             }
                             else if (line.StartsWith("PKT_C_"))
                             {
-                                serverRegister += String.Format(PacketFormat_CSharp.PMRegister, line) + "\n\t\t";
+                                clientRegister += String.Format(PacketFormat_CSharp.PMRegister, line) + "\n\t\t";
                             }
                             else if (line.StartsWith("//"))
                             {
