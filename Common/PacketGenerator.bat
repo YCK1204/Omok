@@ -17,7 +17,7 @@ if not exist "%CLIENT_SCRIPT_PATH%\FlatBuffers" (
 
 del /S /Q "*.cs"
 del /S /Q "%CLIENT_SCRIPT_PATH%\FlatBuffers\PKT*
-del /S /Q "%SERVER_SCRIPT_PATH%\PKT*
+del /S /Q "%SERVER_SCRIPT_PATH%\FlatBuffers\PKT*
 
 set "fileList="
 
@@ -34,11 +34,11 @@ rem 3초 기다린 후 파일 복사
 timeout /t 3 /nobreak >nul
 for %%f in (*.cs) do (
     copy "%%f" "%CLIENT_SCRIPT_PATH%/FlatBuffers"
-    copy "%%f" "%SERVER_SCRIPT_PATH%"
+    copy "%%f" "%SERVER_SCRIPT_PATH%/FlatBuffers"
 )
 
 rem ---------- Server -----------
-XCOPY /Y ".\Server\PacketManager.cs" %SERVER_SCRIPT_PATH%
+XCOPY /Y ".\Server\PacketManager.cs" "%SERVER_SCRIPT_PATH%\Packet"
 rem -----------------------------
 
 rem ---------- Client -------------

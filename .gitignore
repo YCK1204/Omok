@@ -12,10 +12,10 @@ Omok/[Uu]ser[Ss]ettings/
 Omok/Assets/Scripts/FlatBuffers
 Omok/Assets/Scripts/Packet/PacketManager.cs
 
-OmokServer/OmokServer/PKT*
+OmokServer/OmokServer/FlatBuffers/PKT*
 OmokServer/*/obj
 OmokServer/*/bin
-OmokServer/OmokServer/PacketManager.cs
+OmokServer/OmokServer/Packet/PacketManager.cs
 Common/*.cs
 Common/Client
 Common/Server
