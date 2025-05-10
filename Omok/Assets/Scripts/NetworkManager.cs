@@ -1,15 +1,13 @@
 using ServerCore;
 using System;
 using System.Net;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.LightTransport;
-
 public class TestSession : PacketSession
 {
     public override void OnConnected(EndPoint endPoint)
     {
         Debug.Log("OnConnected");
+
         byte[] a = new byte[4];
         BitConverter.TryWriteBytes(new Span<byte>(a), 4);
         BitConverter.TryWriteBytes(new ArraySegment<byte>(a, 2, 2), 0);
