@@ -17,4 +17,9 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Managers\" />
+    <Folder Include="FlatBuffers\" />
+  </ItemGroup>
+
 </Project>
