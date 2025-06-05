@@ -19623,7 +19623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538727fc263a60e4e9d23d5019fff06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cells:
+  Cells:
   - cells:
     - {fileID: 8717484222318064253}
     - {fileID: 9109051739998726993}

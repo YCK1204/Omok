@@ -2,10 +2,6 @@ using Define;
 using System;
 using UnityEngine;
 
-// 열린 3 : 양 옆으로 막혀있지 않은 3
-// 33 금수 : 열린 3이 두개로 겹치면서 생성되는 경우
-// 열린 3 체크 방법 : 착수하려는 셀의 방향으로 막혀있는지?, 반대 방향은 막혀있는지?
-// 막혀있는지 체크 : 한쪽 방향이라도 막혀있다면 막힌 3, bool 변수를 통해 열려있는곳이 2번 나온지 체크, 2번 나왔다면 그 방향은 열림
 [Serializable]
 public class Cells
 {
@@ -15,36 +11,34 @@ public class Cells
         get { return cells[index]; }
         set { cells[index] = value; }
     }
+    public OmokCell this[float x] { get { return cells[(int)x]; } set { cells[(int)x] = value; } }
 }
 public class BoardController : MonoBehaviour
 {
     #region variables
-    public Cells[] cells;
+    public Cells[] Cells;
     public Stone BlackStone;
     public Stone WhiteStone;
     public Stone ForbiddenStone;
-    int[,] Directions = new int[,]
+    public OmokCell this[float y, float x]
     {
-    { 0, 1 },  // →
-    { 1, 0 },  // ↓
-    { 1, 1 },  // ↘
-    { 1, -1 }  // ↙
-    };
+        get => Cells[(int)y][x];
+        set => Cells[(int)y][x] = value;
+    }
+    public OmokCell this[Vector2 pos]
+    {
+        get => Cells[(int)pos.y][pos.x];
+        set => Cells[(int)pos.y][pos.x] = value;
+    }
     #endregion
+    int a = 0;
+    private void Start()
+    {
+        GameManager.Rule.Board = this;
+    }
     private void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                Vector2 worldPos = Camera.main.ScreenToWorldPoint(touch.position);
-
-                Debug.Log("월드 위치: " + worldPos);
-            }
-        }
-#if UNITY_EDITOR
+#if UNITY_EDITOR // 디버깅용
         if (Input.GetMouseButtonDown(0)) // 마우스 왼쪽 버튼 클릭
         {
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -55,216 +49,39 @@ public class BoardController : MonoBehaviour
             {
                 var cell = hit.collider.GetComponent<OmokCell>();
 
-                if (CanPlace(cell.y, cell.x))
+                if (a % 2 == 0)
                 {
-                    cell.PlaceStone(BlackStone);
-                    UpdateBoard();
+                    if (Cells[cell.y][cell.x].StoneType == StoneType.NONE)
+                    {
+                        cell.PlaceStone(BlackStone);
+                        UpdateBoard();
+                        //a++;
+                    }
+                }
+                else
+                {
+                    cell.PlaceStone(WhiteStone);
+                    a++;
                 }
             }
         }
 #endif
     }
-
-    OmokPlaceType Is33Or44(int x, int y, int dx, int dy)
-    {
-        int count = 1;
-        bool firstBlank = false;
-        bool forwardOpen = false;
-        bool backwardOpen = false;
-
-        // 전방 (한 방향)
-        int nx = x + dx;
-        int ny = y + dy;
-        while (InBoard(ny, nx))
-        {
-            if (cells[ny][nx].GetStoneType == Define.StoneType.BLACK)
-            {
-                count++;
-                nx += dx;
-                ny += dy;
-            }
-            else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE || cells[ny][nx].GetStoneType == Define.StoneType.FORBIDDEN)
-            {
-                if (!firstBlank)
-                {
-                    firstBlank = true;
-                    nx += dx;
-                    ny += dy;
-                    if (InBoard(ny, nx) == false)
-                    {
-                        forwardOpen = true;
-                        break;
-                    }
-                }
-                else
-                {
-                    forwardOpen = true;
-                    break;
-                }
-            }
-            else break;
-        }
-
-        // 후방 (반대 방향)
-        firstBlank = false;
-        nx = x - dx;
-        ny = y - dy;
-
-        while (InBoard(ny, nx))
-        {
-            if (cells[ny][nx].GetStoneType == Define.StoneType.BLACK)
-            {
-                count++;
-                nx -= dx;
-                ny -= dy;
-            }
-            else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE || cells[ny][nx].GetStoneType == Define.StoneType.FORBIDDEN)
-            {
-                if (!firstBlank)
-                {
-                    firstBlank = true;
-                    nx -= dx;
-                    ny -= dy;
-                    if (InBoard(ny, nx) == false)
-                    {
-                        backwardOpen = true;
-                        break;
-                    }
-                }
-                else
-                {
-                    backwardOpen = true;
-                    break;
-                }
-            }
-            else break;
-        }
-
-        // 33 판단
-        if ((count == 3) && forwardOpen && backwardOpen)
-        {
-
-            return OmokPlaceType.DOUBLE_THREE;
-        }
-        // 44 판단
-        else if ((count == 4) && forwardOpen && backwardOpen)
-        {
-
-            return OmokPlaceType.DOUBLE_FOUR;
-        }
-        return OmokPlaceType.VALID;
-    }
-    
-    int CountInLine(int y, int x, int dy, int dx)
-    {
-        int count = 1;
-        int nx = x + dx;
-        int ny = y + dy;
-
-        while (InBoard(ny, nx))
-        {
-            if (cells[ny][nx].GetStoneType != Define.StoneType.BLACK)
-                break;
-            count++;
-            nx += dx;
-            ny += dy;
-        }
-        nx = x - dx;
-        ny = y - dy;
-        while (InBoard(ny, nx))
-        {
-            if (cells[ny][nx].GetStoneType != Define.StoneType.BLACK)
-                break;
-            count++;
-            nx -= dx;
-            ny -= dy;
-        }
-        return count;
-    }
-    Define.OmokPlaceType GetOmokPlaceType(int y, int x)
-    {
-        Define.OmokPlaceType ret = Define.OmokPlaceType.VALID;
-        int len = Directions.GetLength(0);
-        bool is3 = false;
-        bool is4 = false;
-        int max = 0;
-        
-        for (int i = 0; i < len; i++)
-        {
-            int dx = Directions[i, 1];
-            int dy = Directions[i, 0];
-            var type = Is33Or44(x, y, dx, dy);
-            switch (type)
-            {
-                case OmokPlaceType.DOUBLE_FOUR:
-                    if (is4 == true)
-                        ret = OmokPlaceType.DOUBLE_FOUR;
-                    else
-                        is4 = true;
-                    break;
-                case OmokPlaceType.DOUBLE_THREE:
-                    if (ret == OmokPlaceType.DOUBLE_FOUR)
-                        break;
-                    if (is3 == true)
-                        ret = OmokPlaceType.DOUBLE_THREE;
-                    else
-                        is3 = true;
-                    break;
-            }
-
-            int cnt = CountInLine(y, x, dy, dx);
-            max = Math.Max(max, cnt);
-        }
-
-        switch (max)
-        {
-            case 9:
-                ret = Define.OmokPlaceType.NINE;
-                break;
-            case 8:
-                ret = Define.OmokPlaceType.EIGHT;
-                break;
-            case 7:
-                ret = Define.OmokPlaceType.SEVEN;
-                break;
-            case 6:
-                ret = Define.OmokPlaceType.SIX;
-                break;
-            case 5:
-                ret = Define.OmokPlaceType.FIVE;
-                break;
-        }
-        return ret;
-    }
-    bool CanPlace(int y, int x, bool update = false)
-    {
-        if (cells[y][x].GetStoneType == Define.StoneType.NONE || (update == true && cells[y][x].GetStoneType == Define.StoneType.FORBIDDEN))
-        {
-            var placeType = GetOmokPlaceType(y, x);
-            if (placeType == Define.OmokPlaceType.FIVE)
-                return true;
-            if (placeType == Define.OmokPlaceType.VALID)
-                return true;
-        }
-        return false;
-    }
-
-    bool InBoard(int y, int x) { return (0 <= y && y < 13 && 0 <= x && x < 13); }
     void UpdateBoard()
     {
         for (int y = 0; y < 13; y++)
         {
             for (int x = 0; x < 13; x++)
             {
-                if (cells[y][x].GetStoneType == Define.StoneType.NONE)
+                if (Cells[y][x].StoneType == Define.StoneType.NONE)
                 {
-                    if (CanPlace(y, x, true) == false)
-                        cells[y][x].PlaceStone(ForbiddenStone);
+                    if (GameManager.Rule.CanPlace(y, x, true) == false)
+                        Cells[y][x].PlaceStone(ForbiddenStone);
                 }
-                else if (cells[y][x].GetStoneType == Define.StoneType.FORBIDDEN)
+                else if (Cells[y][x].StoneType == Define.StoneType.FORBIDDEN)
                 {
-                    if (CanPlace(y, x, true) == true)
-                        cells[y][x].PlaceStone(null);
+                    if (GameManager.Rule.CanPlace(y, x, true) == true)
+                        Cells[y][x].PlaceStone(null);
                 }
             }
         }
