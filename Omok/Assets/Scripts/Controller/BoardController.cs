@@ -64,7 +64,36 @@ public class BoardController : MonoBehaviour
         }
 #endif
     }
+    bool IsOpen33(Vector2 maxPos, Vector2 minPos, int dx, int dy)
+    {
+        int blankCount = 0;
+        int nx = (int)maxPos.x;
+        int ny = (int)maxPos.y;
 
+        for (int i = 0; i < 2; i++)
+        {
+            nx += dx;
+            ny += dy;
+            if (InBoard(ny, nx) == false)
+                break;
+            if (cells[ny][nx].GetStoneType == StoneType.NONE)
+                blankCount++;
+        }
+        nx = (int)minPos.x;
+        ny = (int)minPos.y;
+        for (int i = 0; i < 2; i++)
+        {
+            nx -= dx;
+            ny -= dy;
+            if (InBoard(ny, nx) == false)
+                break;
+            if (cells[ny][nx].GetStoneType == StoneType.NONE)
+                blankCount++;
+        }
+        if (blankCount >= 3)
+            return true;
+        return false;
+    }
     OmokPlaceType Is33Or44(int x, int y, int dx, int dy)
     {
         int count = 1;
@@ -75,6 +104,7 @@ public class BoardController : MonoBehaviour
         // 전방 (한 방향)
         int nx = x + dx;
         int ny = y + dy;
+        Vector2 maxPos = new Vector2(x, y);
         while (InBoard(ny, nx))
         {
             if (cells[ny][nx].GetStoneType == Define.StoneType.BLACK)
@@ -82,6 +112,8 @@ public class BoardController : MonoBehaviour
                 count++;
                 nx += dx;
                 ny += dy;
+                maxPos.x = nx;
+                maxPos.y = ny;
             }
             else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE || cells[ny][nx].GetStoneType == Define.StoneType.FORBIDDEN)
             {
@@ -109,7 +141,7 @@ public class BoardController : MonoBehaviour
         firstBlank = false;
         nx = x - dx;
         ny = y - dy;
-
+        Vector2 minPos = new Vector2(x, y);
         while (InBoard(ny, nx))
         {
             if (cells[ny][nx].GetStoneType == Define.StoneType.BLACK)
@@ -117,6 +149,8 @@ public class BoardController : MonoBehaviour
                 count++;
                 nx -= dx;
                 ny -= dy;
+                minPos.x = nx;
+                minPos.y = ny;
             }
             else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE || cells[ny][nx].GetStoneType == Define.StoneType.FORBIDDEN)
             {
@@ -143,13 +177,13 @@ public class BoardController : MonoBehaviour
         // 33 판단
         if ((count == 3) && forwardOpen && backwardOpen)
         {
-
+            if (IsOpen33(maxPos, minPos, dx, dy) == false) // 거짓 금수 판단
+                return OmokPlaceType.VALID;
             return OmokPlaceType.DOUBLE_THREE;
         }
         // 44 판단
         else if ((count == 4) && forwardOpen && backwardOpen)
         {
-
             return OmokPlaceType.DOUBLE_FOUR;
         }
         return OmokPlaceType.VALID;
