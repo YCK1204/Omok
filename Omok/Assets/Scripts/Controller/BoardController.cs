@@ -1,3 +1,4 @@
+using Define;
 using System;
 using UnityEngine;
 
@@ -30,15 +31,6 @@ public class BoardController : MonoBehaviour
     { 1, -1 }  // ↙
     };
     #endregion
-    public bool CanPlaceStone(int y, int x, bool isBlack = true)
-    {
-        if (InBoard(y, x) == false)
-            return false;
-        if (isBlack == false)
-            return true;
-
-        return true;
-    }
     private void Update()
     {
         if (Input.touchCount > 0)
@@ -72,7 +64,8 @@ public class BoardController : MonoBehaviour
         }
 #endif
     }
-    bool Is33(int x, int y, int dx, int dy)
+
+    OmokPlaceType Is33Or44(int x, int y, int dx, int dy)
     {
         int count = 1;
         bool firstBlank = false;
@@ -97,6 +90,11 @@ public class BoardController : MonoBehaviour
                     firstBlank = true;
                     nx += dx;
                     ny += dy;
+                    if (InBoard(ny, nx) == false)
+                    {
+                        forwardOpen = true;
+                        break;
+                    }
                 }
                 else
                 {
@@ -127,6 +125,11 @@ public class BoardController : MonoBehaviour
                     firstBlank = true;
                     nx -= dx;
                     ny -= dy;
+                    if (InBoard(ny, nx) == false)
+                    {
+                        backwardOpen = true;
+                        break;
+                    }
                 }
                 else
                 {
@@ -137,77 +140,21 @@ public class BoardController : MonoBehaviour
             else break;
         }
 
-        // 쓰리 판단
-        return (count == 3) && forwardOpen && backwardOpen;
-    }
-    bool Is44(int x, int y, int dx, int dy)
-    {
-        int count = 1;
-        bool firstBlank = false;
-        bool forwardOpen = false;
-        bool backwardOpen = false;
-
-        // 전방 (한 방향)
-        int nx = x + dx;
-        int ny = y + dy;
-        while (InBoard(ny, nx))
+        // 33 판단
+        if ((count == 3) && forwardOpen && backwardOpen)
         {
-            if (cells[ny][nx].GetStoneType == Define.StoneType.BLACK)
-            {
-                count++;
-                nx += dx;
-                ny += dy;
-            }
-            else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE || cells[ny][nx].GetStoneType == Define.StoneType.FORBIDDEN)
-            {
-                if (!firstBlank)
-                {
-                    firstBlank = true;
-                    nx += dx;
-                    ny += dy;
-                }
-                else
-                {
-                    forwardOpen = true;
-                    break;
-                }
-            }
-            else break;
+
+            return OmokPlaceType.DOUBLE_THREE;
         }
-
-        // 후방 (반대 방향)
-        firstBlank = false;
-        nx = x - dx;
-        ny = y - dy;
-
-        while (InBoard(ny, nx))
+        // 44 판단
+        else if ((count == 4) && forwardOpen && backwardOpen)
         {
-            if (cells[ny][nx].GetStoneType == Define.StoneType.BLACK)
-            {
-                count++;
-                nx -= dx;
-                ny -= dy;
-            }
-            else if (cells[ny][nx].GetStoneType == Define.StoneType.NONE || cells[ny][nx].GetStoneType == Define.StoneType.FORBIDDEN)
-            {
-                if (!firstBlank)
-                {
-                    firstBlank = true;
-                    nx -= dx;
-                    ny -= dy;
-                }
-                else
-                {
-                    backwardOpen = true;
-                    break;
-                }
-            }
-            else break;
-        }
 
-        // 쓰리 판단
-        return (count == 4) && forwardOpen && backwardOpen;
+            return OmokPlaceType.DOUBLE_FOUR;
+        }
+        return OmokPlaceType.VALID;
     }
+    
     int CountInLine(int y, int x, int dy, int dx)
     {
         int count = 1;
@@ -238,29 +185,37 @@ public class BoardController : MonoBehaviour
     {
         Define.OmokPlaceType ret = Define.OmokPlaceType.VALID;
         int len = Directions.GetLength(0);
+        bool is3 = false;
         bool is4 = false;
         int max = 0;
-
-        if (Check33(y, x) == true)
-            ret = Define.OmokPlaceType.DOUBLE_THREE;
-        if (Check44(y, x) == true)
-            ret = Define.OmokPlaceType.DOUBLE_FOUR;
+        
         for (int i = 0; i < len; i++)
         {
             int dx = Directions[i, 1];
             int dy = Directions[i, 0];
+            var type = Is33Or44(x, y, dx, dy);
+            switch (type)
+            {
+                case OmokPlaceType.DOUBLE_FOUR:
+                    if (is4 == true)
+                        ret = OmokPlaceType.DOUBLE_FOUR;
+                    else
+                        is4 = true;
+                    break;
+                case OmokPlaceType.DOUBLE_THREE:
+                    if (ret == OmokPlaceType.DOUBLE_FOUR)
+                        break;
+                    if (is3 == true)
+                        ret = OmokPlaceType.DOUBLE_THREE;
+                    else
+                        is3 = true;
+                    break;
+            }
 
             int cnt = CountInLine(y, x, dy, dx);
-            if (max < cnt)
-                max = cnt;
-            if (cnt == 4)
-            {
-                if (is4 == true)
-                    ret = Define.OmokPlaceType.DOUBLE_FOUR;
-                else
-                    is4 = true;
-            }
+            max = Math.Max(max, cnt);
         }
+
         switch (max)
         {
             case 9:
@@ -293,34 +248,7 @@ public class BoardController : MonoBehaviour
         }
         return false;
     }
-    bool Check33(int y, int x)
-    {
-        int count = 0;
-        int len = Directions.GetLength(0);
 
-        for (int i = 0; i < len; i++)
-        {
-            int dx = Directions[i, 1];
-            int dy = Directions[i, 0];
-            if (Is33(x, y, dx, dy) == true)
-                count++;
-        }
-        return count > 1;
-    }
-    bool Check44(int y, int x)
-    {
-        int count = 0;
-        int len = Directions.GetLength(0);
-
-        for (int i = 0; i < len; i++)
-        {
-            int dx = Directions[i, 1];
-            int dy = Directions[i, 0];
-            if (Is44(x, y, dx, dy) == true)
-                count++;
-        }
-        return count > 1;
-    }
     bool InBoard(int y, int x) { return (0 <= y && y < 13 && 0 <= x && x < 13); }
     void UpdateBoard()
     {
