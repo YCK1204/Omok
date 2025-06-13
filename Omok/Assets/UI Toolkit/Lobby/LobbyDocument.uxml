@@ -1,0 +1,478 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Lobby/LobbyStyle.uss?fileID=7433441132597879392&amp;guid=80cadd80f3e02e940a1edb8727141fc8&amp;type=3#LobbyStyle" />
+    <Style src="project://database/Assets/UI%20Toolkit/Lobby/Room.uss?fileID=7433441132597879392&amp;guid=326f5c916c67a464d8a8bf77a22ee9aa&amp;type=3#Room" />
+    <Style src="project://database/Assets/UI%20Toolkit/Lobby/More.uss?fileID=7433441132597879392&amp;guid=31c7a897e074f3740a5be55dd581131e&amp;type=3#More" />
+    <Style src="project://database/Assets/UI%20Toolkit/Lobby/Rank.uss?fileID=7433441132597879392&amp;guid=fd0628276b0bf7345a9a722b706e89af&amp;type=3#Rank" />
+    <ui:VisualElement name="BG" style="width: 100%; height: 100%; background-color: rgb(255, 255, 255); position: absolute;" />
+    <ui:VisualElement name="Container-Profile" style="height: 300px; width: 100%; background-color: rgb(180, 180, 180); position: absolute; top: 0;">
+        <ui:VisualElement name="Img-Profile" style="flex-grow: 1; position: absolute; width: 185px; height: 185px; left: 50px; top: 50px; background-color: rgb(217, 217, 217); border-top-left-radius: 774px; border-top-right-radius: 774px; border-bottom-right-radius: 774px; border-bottom-left-radius: 774px;" />
+        <ui:VisualElement name="Container-PlayerInfo" style="flex-grow: 1; width: 50%; height: 100%; justify-content: space-around; align-self: center; margin-top: 15px; margin-bottom: 0; padding-top: 50px; padding-bottom: 50px; padding-left: 20px;">
+            <ui:Label text="9단" name="Text-Tier" style="font-size: 48px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            <ui:Label text="닉네임닉네임닉네" name="Text-Nickname" style="font-size: 48px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-WinLoseStreak" style="flex-grow: 1; position: absolute; right: 62.5px; width: 180px; height: 180px; top: 62.5px; background-color: rgb(217, 217, 217); border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); justify-content: space-around; align-items: center; padding-top: 10px; padding-bottom: 10px;">
+            <ui:Label text="연승" name="Text-StreakName" style="-unity-text-align: upper-center; font-size: 48px;" />
+            <ui:Label text="연승" name="Text-StreakValue" style="-unity-text-align: upper-center; font-size: 48px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Container-Header" style="width: 100%; height: 180px; background-color: rgb(151, 151, 151); margin-top: 35px; flex-direction: row; position: absolute; top: 280px;">
+        <ui:VisualElement name="Container-Lobby" style="flex-grow: 1; width: 100%; height: 100%; position: absolute; display: none;">
+            <ui:Button name="Button-More" class="Button-Base" style="width: 124px; height: 124px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; top: 28px; left: 50px; position: absolute;">
+                <ui:VisualElement name="Img-More" style="background-image: resource(&apos;Imgs/More&apos;); width: 90%; height: 90%; align-self: center; top: 7px;" />
+            </ui:Button>
+            <ui:Button name="Button-Refresh" class="Button-Base" style="width: 124px; height: 124px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; top: 28px; left: auto; position: absolute; right: 280px;">
+                <ui:VisualElement name="Img-Refresh" style="background-image: resource(&apos;Imgs/refresh&apos;); width: 90%; height: 90%; align-self: center; top: 7px;" />
+            </ui:Button>
+            <ui:Button name="Button-SearchRoom" class="Button-Base" style="width: 124px; height: 124px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; top: 28px; left: auto; position: absolute; right: 70px;">
+                <ui:VisualElement name="Img-SearchRoom" style="background-image: resource(&apos;Imgs/Search&apos;); width: 90%; height: 90%; align-self: center; top: 7px;" />
+            </ui:Button>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-More" style="flex-grow: 1; width: 100%; height: 100%; position: absolute; display: flex;">
+            <ui:Button name="Button-Home" class="Button-Base" style="width: 124px; height: 124px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; top: 28px; left: 50px; position: absolute;">
+                <ui:VisualElement name="Img-Home" style="background-image: resource(&apos;Imgs/Home&apos;); width: 80%; height: 80%; align-self: center; top: 12px;" />
+            </ui:Button>
+            <ui:Button name="Button-Ranking" class="Button-Base" style="width: 124px; height: 124px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; top: 28px; left: auto; position: absolute; right: 280px;">
+                <ui:VisualElement name="Img-Ranking" style="background-image: resource(&apos;Imgs/Ranking&apos;); width: 90%; height: 90%; align-self: center; top: 7px;" />
+            </ui:Button>
+            <ui:Button name="Button-GameRecord" class="Button-Base" style="width: 124px; height: 124px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; top: 28px; left: auto; position: absolute; right: 70px;">
+                <ui:VisualElement name="Img-GameRecord" style="background-image: resource(&apos;Imgs/Record&apos;); width: 75%; height: 100%; align-self: center;" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Container-Title" style="flex-grow: 0; height: 85px; width: 100%; position: absolute; background-color: rgb(151, 151, 151); margin-bottom: 0; margin-top: 0; margin-right: 0; margin-left: 0; top: 510px; display: none;">
+        <ui:Label text="진행중인 대국 리스트" name="Text-Title" style="width: 100%; height: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 25px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: middle-left; font-size: 42px; -unity-font-style: normal;" />
+    </ui:VisualElement>
+    <ui:ScrollView name="ScrollView-RoomList" style="width: 100%; height: 80%; flex-grow: 1; position: absolute; top: 595px; overflow: hidden; display: none;">
+        <ui:VisualElement name="Container-Room" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RoomInfoLeft" class="Container-RoomInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RoomInfoRight" class="Container-RoomInfoRight">
+                <ui:VisualElement name="Container-PlayerTiers" class="Container-PlayerTiers">
+                    <ui:Label text="9단" name="Text-BlackPlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="9단" name="Text-WhitePlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RoomInfo" class="Container-RoomInfo">
+                    <ui:Label text="#001" name="Text-RoomId" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="100수 진행중" name="Text-RoomProcessInfo" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-Room" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RoomInfoLeft" class="Container-RoomInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RoomInfoRight" class="Container-RoomInfoRight">
+                <ui:VisualElement name="Container-PlayerTiers" class="Container-PlayerTiers">
+                    <ui:Label text="9단" name="Text-BlackPlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="9단" name="Text-WhitePlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RoomInfo" class="Container-RoomInfo">
+                    <ui:Label text="#001" name="Text-RoomId" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="100수 진행중" name="Text-RoomProcessInfo" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-Room" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RoomInfoLeft" class="Container-RoomInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RoomInfoRight" class="Container-RoomInfoRight">
+                <ui:VisualElement name="Container-PlayerTiers" class="Container-PlayerTiers">
+                    <ui:Label text="9단" name="Text-BlackPlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="9단" name="Text-WhitePlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RoomInfo" class="Container-RoomInfo">
+                    <ui:Label text="#001" name="Text-RoomId" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="100수 진행중" name="Text-RoomProcessInfo" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-Room" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RoomInfoLeft" class="Container-RoomInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RoomInfoRight" class="Container-RoomInfoRight">
+                <ui:VisualElement name="Container-PlayerTiers" class="Container-PlayerTiers">
+                    <ui:Label text="9단" name="Text-BlackPlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="9단" name="Text-WhitePlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RoomInfo" class="Container-RoomInfo">
+                    <ui:Label text="#001" name="Text-RoomId" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="100수 진행중" name="Text-RoomProcessInfo" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-Room" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RoomInfoLeft" class="Container-RoomInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RoomInfoRight" class="Container-RoomInfoRight">
+                <ui:VisualElement name="Container-PlayerTiers" class="Container-PlayerTiers">
+                    <ui:Label text="9단" name="Text-BlackPlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="9단" name="Text-WhitePlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RoomInfo" class="Container-RoomInfo">
+                    <ui:Label text="#001" name="Text-RoomId" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="100수 진행중" name="Text-RoomProcessInfo" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-Room" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RoomInfoLeft" class="Container-RoomInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RoomInfoRight" class="Container-RoomInfoRight">
+                <ui:VisualElement name="Container-PlayerTiers" class="Container-PlayerTiers">
+                    <ui:Label text="9단" name="Text-BlackPlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="9단" name="Text-WhitePlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RoomInfo" class="Container-RoomInfo">
+                    <ui:Label text="#001" name="Text-RoomId" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="100수 진행중" name="Text-RoomProcessInfo" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-Room" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RoomInfoLeft" class="Container-RoomInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RoomInfoRight" class="Container-RoomInfoRight">
+                <ui:VisualElement name="Container-PlayerTiers" class="Container-PlayerTiers">
+                    <ui:Label text="9단" name="Text-BlackPlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="9단" name="Text-WhitePlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RoomInfo" class="Container-RoomInfo">
+                    <ui:Label text="#001" name="Text-RoomId" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="100수 진행중" name="Text-RoomProcessInfo" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-Room" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RoomInfoLeft" class="Container-RoomInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RoomInfoRight" class="Container-RoomInfoRight">
+                <ui:VisualElement name="Container-PlayerTiers" class="Container-PlayerTiers">
+                    <ui:Label text="9단" name="Text-BlackPlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="9단" name="Text-WhitePlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RoomInfo" class="Container-RoomInfo">
+                    <ui:Label text="#001" name="Text-RoomId" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="100수 진행중" name="Text-RoomProcessInfo" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-Room" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RoomInfoLeft" class="Container-RoomInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RoomInfoRight" class="Container-RoomInfoRight">
+                <ui:VisualElement name="Container-PlayerTiers" class="Container-PlayerTiers">
+                    <ui:Label text="9단" name="Text-BlackPlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="9단" name="Text-WhitePlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RoomInfo" class="Container-RoomInfo">
+                    <ui:Label text="#001" name="Text-RoomId" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="100수 진행중" name="Text-RoomProcessInfo" class="Text-Base" style="font-size: 42px; -unity-text-align: upper-right; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+    <ui:VisualElement name="Container-SearchRoom" style="flex-grow: 0; position: absolute; width: 800px; height: 600px; align-self: center; top: 35%; background-color: rgb(217, 217, 217); border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-color: rgb(0, 0, 0); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); overflow: hidden; display: none;">
+        <ui:Label text="방 찾기" name="Text-Title" style="align-self: center; position: absolute; top: 30px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 64px; -unity-font-style: normal;" />
+        <ui:VisualElement name="Container-SearchOptions" style="flex-grow: 1; position: absolute; width: 80%; height: 60%; top: 25%; left: 20%;">
+            <ui:VisualElement name="Container-SearchTag" style="flex-grow: 1;">
+                <ui:Label text="특정 방 찾기" name="Text-SearchTag" style="position: relative; font-size: 38px; top: auto; left: auto;" />
+                <ui:TextField placeholder-text="001" name="TextInput-SearchTag" style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; width: 50%; height: 40%; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); font-size: 32px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-TargetTier" style="flex-grow: 1;">
+                <ui:Label text="특정 방 찾기" name="Text-TargetTier" style="font-size: 38px;" />
+                <ui:VisualElement name="Container-ChoiceTier" style="flex-direction: row;">
+                    <ui:VisualElement name="Container-MiminumTier" style="flex-grow: 0;">
+                        <ui:Label text="최소 급수" name="Text-MinimumTier" style="width: 100px; font-size: 24px;" />
+                        <ui:DropdownField choices="18급,17급,16급,15급,14급,13급,12급,11급,10급,9급,8급,7급,6급,5급,4급,3급,2급,1급,1단,2단,3단,4단,5단,6단,7단,8단,9단" index="0" name="DropBox-MinimumTier" class="DropBox" style="width: 130px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; height: 50px; font-size: 22px;" />
+                    </ui:VisualElement>
+                    <ui:Label text="~" double-click-selects-word="false" style="position: absolute; align-self: center; left: 169px; font-size: 32px; top: 43px;" />
+                    <ui:VisualElement name="Container-MaximumTier" class="DropBox" style="flex-grow: 0; left: 100px;">
+                        <ui:Label text="최대 급수" name="Text-MaximumTier" style="width: 100px; font-size: 24px;" />
+                        <ui:DropdownField choices="18급,17급,16급,15급,14급,13급,12급,11급,10급,9급,8급,7급,6급,5급,4급,3급,2급,1급,1단,2단,3단,4단,5단,6단,7단,8단,9단" index="26" name="DropBox-MaximumTier" style="width: 130px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; height: 50px; font-size: 22px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:RadioButtonGroup style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 40%; left: 10%; height: 40%;">
+            <ui:RadioButton name="RB-SearchTag" />
+            <ui:RadioButton name="RB-TargetTier" style="margin-top: 159px;" />
+        </ui:RadioButtonGroup>
+        <ui:VisualElement name="Container-OkOrCancel" style="flex-grow: 0; flex-direction: row; position: absolute; bottom: 0; width: 100%; height: 75px; justify-content: space-between;">
+            <ui:Button text="취소" name="Button-Cancel" class="Button-Base" style="flex-grow: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgb(102, 102, 102); border-top-color: rgb(102, 102, 102); border-bottom-color: rgba(0, 0, 0, 0); font-size: 42px; color: rgb(102, 102, 102);" />
+            <ui:Button text="검색" name="Button-Ok" class="Button-Base" style="flex-grow: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgb(102, 102, 102); border-bottom-color: rgba(0, 0, 0, 0); font-size: 42px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Container-More" style="width: 100%; height: 100%; display: none;">
+        <ui:VisualElement name="Temp1" style="width: 100%; height: 500px;" />
+        <ui:VisualElement name="Container-Etc" style="flex-grow: 1;">
+            <ui:VisualElement name="Container-PlayerInfoDetail" style="background-color: rgb(217, 217, 217); height: 375px; width: 100%; margin-top: 25px; flex-direction: row;">
+                <ui:VisualElement name="Container-PlayerInfoLeft" style="flex-grow: 0; width: 705px;">
+                    <ui:Label text="9단 LP 2400" name="Text-PlayerStatus" style="left: 40px; margin-top: 30px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 42px;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" style="left: 40px; margin-top: 5px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 42px;" />
+                    <ui:Label text="TOP LP 2400" name="Text-PlayerTopLP" style="left: 40px; margin-top: 80px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 42px;" />
+                    <ui:Label text="최고 연승 100" name="Text-PlayerTopWinStreak" style="left: 40px; margin-top: 5px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 42px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="position: absolute; width: 20px; height: 100%; border-left-color: rgb(93, 93, 93); border-right-color: rgb(94, 94, 94); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; left: 691px;" />
+                <ui:VisualElement name="Container-PlayerInfoRight" style="flex-grow: 1;">
+                    <ui:VisualElement name="Img-Tier" style="flex-grow: 0; width: 70%; height: 85%; align-self: center; top: 7.5%; background-image: url(&quot;project://database/Assets/2D%20Icons-150SpaceRank/Icons/256/Re9.png?fileID=2800000&amp;guid=12fb099ca24c249d9bacc993ff93edc1&amp;type=3#Re9&quot;);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-WinLossRecord" style="background-color: rgb(217, 217, 217); height: 375px; width: 100%; margin-top: 25px; flex-direction: row;">
+                <ui:VisualElement name="Container-Records" style="flex-grow: 0; width: 705px;">
+                    <ui:Label text="최근 10전 10승 0패 0무 (100%)" name="Text-RecordRecent" style="left: 40px; margin-top: 30px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 42px;" />
+                    <ui:Label text="총 200전 100승 100패 0무 (50%)" name="Text-RecordTotal" style="left: 40px; margin-top: 5px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 42px;" />
+                    <ui:Label text="흑 100전 50승 50패 0무 (50%)" name="Text-RecordBlack" style="left: 40px; margin-top: 80px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 42px;" />
+                    <ui:Label text="백 100전 50승 50패 0무 (50%)" name="Text-RecordWhite" style="left: 40px; margin-top: 5px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 42px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-RuleInfo" style="flex-grow: 1;">
+                    <ui:Button name="Button-RuleInfo" style="height: 65%; width: 50%; align-self: center; top: 17.5%; background-image: resource(&apos;Imgs/question_icon_209084&apos;); background-size: 120% 100%; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; -unity-background-image-tint-color: rgb(138, 138, 138);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-GameSetting" style="background-color: rgb(217, 217, 217); height: 375px; width: 100%; margin-top: 25px; flex-direction: row;">
+                <ui:VisualElement name="Container-SetLeft" style="justify-content: space-around; width: 50%; height: 100%;">
+                    <ui:Label text="Sound" name="Text-SetSound" style="align-self: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 64px;" />
+                    <ui:Slider high-value="100" name="Slider-SetSound" style="width: 80%; align-self: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-SetRight" style="width: 50%; height: 100%; align-items: center;">
+                    <ui:Button text="닉네임 변경" name="Button-ChanegeNickname" style="top: 30%; width: 320px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgb(206, 206, 206); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; height: 150px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; font-size: 38px; align-items: center;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-AppInfoText" style="flex-grow: 0; bottom: 200px; width: 100%; height: 100px; position: absolute; justify-content: space-around;">
+                <ui:Label text="Ver 1.0" name="Text-Version" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 20px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 28px;" />
+                <ui:Label text="Created by yeckim" name="Text-Credit" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 20px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 28px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="position: absolute; width: 100%; top: 500px; display: none;">
+        <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+            <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+            <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+            </ui:VisualElement>
+            <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Img-RankDivisionLine" style="flex-grow: 1; width: 100%; position: absolute; border-left-color: rgb(97, 97, 97); border-right-color: rgb(97, 97, 97); border-top-color: rgb(97, 97, 97); border-bottom-color: rgb(97, 97, 97); border-top-width: 10px; border-bottom-width: 10px; top: 740px; border-right-width: 10px; border-left-width: 10px; display: none;" />
+    <ui:ScrollView name="ScrollView-RankList" style="width: 100%; height: 80%; flex-grow: 1; position: absolute; top: 770px; overflow: hidden; display: none;">
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Container-MyRank" class="Container-ListElem" style="width: 100%;">
+            <ui:VisualElement name="Container-RankInfoLeft" class="Container-RankInfoLeft">
+                <ui:VisualElement name="Img-Tier" class="Img-Tier" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RankInfoRight" class="Container-RankInfoRight">
+                <ui:VisualElement name="Container-RankInfoPlayer" class="Container-RankInfoPlayer">
+                    <ui:Label text="9단" name="Text-PlayerTier" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-PlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 35px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                </ui:VisualElement>
+                <ui:Label text="10000" name="Text-RankNum" class="Text-RankNum Text-Base" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+    <ui:ScrollView name="ScrollView-RecordList" style="width: 100%; height: 80%; flex-grow: 1; position: absolute; top: 500px; overflow: hidden; display: flex;">
+        <ui:VisualElement name="Container-Record" class="Container-Room Container-ListElem">
+            <ui:VisualElement name="Container-RecordInfoLeft" class="Container-RecordInfoLeft">
+                <ui:VisualElement name="Container-PlayerTypes" class="Container-PlayerTypes">
+                    <ui:VisualElement name="Img-Black" class="Img-Black" />
+                    <ui:VisualElement name="Img-White" class="Img-White" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Container-PlayerNicknames" class="Container-PlayerNames">
+                    <ui:Label text="닉네임닉네임닉네" name="Text-BlackPlayerNickname" class="Text-Base" style="font-size: 42px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                    <ui:Label text="닉네임닉네임닉네" name="Text-WhitePlayerNickname" class="Text-Base" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Container-RecordRight" class="Container-RecordRight">
+                <ui:Label text="WIN" name="Text-WinLoss" class="Text-Base Text-Draw" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+    <ui:VisualElement name="Container-Footer" style="width: 100%; height: 180px; background-color: rgb(151, 151, 151); bottom: 0; position: absolute; flex-direction: row; justify-content: space-between;">
+        <ui:Button name="Button-PrevPage" class="Button-Base" style="width: 124px; height: 124px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; top: 28px; left: 100px; position: relative;">
+            <ui:VisualElement name="Img-PrevPage" style="background-image: resource(&apos;Imgs/PrevPage&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); width: 60%; height: 80%; align-self: center; top: 12px;" />
+        </ui:Button>
+        <ui:Button name="Button-MatchGame" text="대국" class="Button-Base" style="width: 170px; height: 124px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; top: 28px; font-size: 48px;" />
+        <ui:Button name="Button-NextPage" class="Button-Base" style="width: 124px; height: 124px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; top: 28px; right: 100px; position: relative;">
+            <ui:VisualElement name="Img-PrevPage" style="background-image: resource(&apos;Imgs/NextPage&apos;); -unity-background-image-tint-color: rgb(0, 0, 0); width: 60%; height: 80%; align-self: center; top: 12px;" />
+        </ui:Button>
+    </ui:VisualElement>
+</ui:UXML>

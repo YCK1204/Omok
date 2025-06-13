@@ -1,0 +1,86 @@
+.Container-RankInfoLeft {
+    width: 20%;
+    align-items: center;
+    border-left-width: 0;
+    background-color: rgb(195, 195, 195);
+    border-right-color: rgb(0, 0, 0);
+    border-right-width: 1px;
+}
+
+.Img-Tier {
+    background-image: url("project://database/Assets/2D%20Icons-150SpaceRank/Icons/256/Re9.png?fileID=2800000&guid=12fb099ca24c249d9bacc993ff93edc1&type=3#Re9");
+    width: 70%;
+    position: absolute;
+    height: 80%;
+    left: 15%;
+    top: 10%;
+}
+
+.Container-RankInfoRight {
+    flex-grow: 1;
+    width: 80%;
+    height: 100%;
+    flex-direction: row;
+}
+
+.Container-RankInfoPlayer {
+    height: 100%;
+    padding-top: 25px;
+    padding-right: 0;
+    padding-bottom: 25px;
+    padding-left: 0;
+    width: 60%;
+    justify-content: space-around;
+}
+
+.Text-RankNum {
+    align-self: center;
+    -unity-text-align: middle-center;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    flex-grow: 1;
+    height: 100%;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    font-size: 64px;
+}
+
+.Container-RecordInfoLeft {
+    width: 70%;
+    flex-direction: row;
+}
+
+.Container-RecordRight {
+    background-color: rgb(195, 195, 195);
+    width: 30%;
+    border-left-color: rgb(0, 0, 0);
+    border-left-width: 1px;
+}
+
+.Text-Win {
+    width: 100%;
+    height: 100%;
+    -unity-text-align: middle-center;
+    color: rgb(39, 174, 96);
+    font-size: 84px;
+}
+
+.Text-Lose {
+    width: 100%;
+    height: 100%;
+    -unity-text-align: middle-center;
+    color: rgb(255, 73, 73);
+    font-size: 84px;
+}
+
+.Text-Draw {
+    width: 100%;
+    height: 100%;
+    -unity-text-align: middle-center;
+    color: rgb(120, 120, 120);
+    font-size: 84px;
+}

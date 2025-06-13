@@ -1,0 +1,81 @@
+.Button-Base {
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-left-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    position: relative;
+}
+
+.Text-Base {
+    font-size: 42px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.unity-scroller--vertical {
+    visibility: hidden;
+    width: 0;
+}
+
+#unity-text-input {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+}
+
+.Container-ListElem {
+    flex-grow: 1;
+    height: 200px;
+    background-color: rgb(217, 217, 217);
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    flex-direction: row;
+    margin-top: 15px;
+}
+
+.Container-RecordInfoLeft {
+    width: 70%;
+    flex-direction: row;
+}
+
+.Container-RecordRight {
+    background-color: rgb(195, 195, 195);
+    width: 30%;
+    border-left-color: rgb(0, 0, 0);
+    border-left-width: 1px;
+}
+
+.Text-Win {
+    width: 100%;
+    height: 100%;
+    -unity-text-align: middle-center;
+    color: rgb(39, 174, 96);
+    font-size: 84px;
+}
+
+.Text-Lose {
+    width: 100%;
+    height: 100%;
+    -unity-text-align: middle-center;
+    color: rgb(255, 73, 73);
+    font-size: 84px;
+}
+
+.Text-Draw {
+    width: 100%;
+    height: 100%;
+    -unity-text-align: middle-center;
+    color: rgb(120, 120, 120);
+    font-size: 84px;
+}
