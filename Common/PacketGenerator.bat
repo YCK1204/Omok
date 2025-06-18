@@ -15,6 +15,10 @@ if not exist "%CLIENT_SCRIPT_PATH%\FlatBuffers" (
     mkdir "%CLIENT_SCRIPT_PATH%\FlatBuffers"
 )
 
+if not exist "%SERVER_SCRIPT_PATH%\FlatBuffers" (
+    mkdir "%SERVER_SCRIPT_PATH%\FlatBuffers"
+)
+
 del /S /Q "*.cs"
 del /S /Q "%CLIENT_SCRIPT_PATH%\FlatBuffers\PKT*
 del /S /Q "%SERVER_SCRIPT_PATH%\FlatBuffers\PKT*
