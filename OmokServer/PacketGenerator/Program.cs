@@ -64,9 +64,9 @@ namespace PacketGenerator
                     Directory.CreateDirectory("Client");
                 if (Directory.Exists("Server") == false)
                     Directory.CreateDirectory("Server");
-                ClientPacketStr = String.Format(PacketFormat_CSharp.PMTotal, clientRegister);
+                ClientPacketStr = String.Format(PacketFormat_CSharp.ClientPMTotal, serverRegister);
                 File.WriteAllText("./Client/PacketManager.cs", ClientPacketStr);
-                ServerPacketStr = String.Format(PacketFormat_CSharp.PMTotal, clientRegister);
+                ServerPacketStr = String.Format(PacketFormat_CSharp.ServerPMTotal, clientRegister);
                 File.WriteAllText("./Server/PacketManager.cs", ServerPacketStr);
             }
         }

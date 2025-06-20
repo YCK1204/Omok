@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
                 GameObject go = new GameObject() { name = @"GameManager" };
                 _instance = go.AddComponent<GameManager>();
                 DontDestroyOnLoad(_instance);
+                Network.Connect();
             }
             return _instance;
         }
@@ -20,5 +21,10 @@ public class GameManager : MonoBehaviour
     public static RenjuRuleManager Rule { get { return Instance._rule; } }
     NetworkManager _network = new NetworkManager();
     public static NetworkManager Network { get { return Instance._network; } }
-
+    PacketManager _packet = new PacketManager();
+    public static PacketManager Packet { get { return Instance._packet; } }
+    private void Update()
+    {
+        Network.Update();
+    }
 }

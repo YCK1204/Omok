@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="FlatBuffer\**" />
+    <EmbeddedResource Remove="FlatBuffer\**" />
+    <None Remove="FlatBuffer\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ServerCore\ServerCore.csproj" />
   </ItemGroup>
 
@@ -18,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Managers\" />
     <Folder Include="FlatBuffers\" />
   </ItemGroup>
 

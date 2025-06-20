@@ -1,0 +1,8 @@
+table PKT_S_Pubkey {
+	key:string;
+}
+
+table PKT_C_Key {
+	key:[uint8];
+	iv:[uint8];
+}
