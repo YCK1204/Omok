@@ -139,14 +139,7 @@ public class PacketManager
 
         return Serialize(encryptedData, builder, id);
     }}
-    public byte[] CreatePacketWithAES<T>(Offset<T> data, FlatBufferBuilder builder, PKT_Type id) where T : struct
-    {{
-        builder.Finish(data.Value);
-        var bytes = builder.SizedByteArray();
-
-        return Serialize(bytes, builder, id);
-    }}
-    public byte[] CreatePacket<T>(Offset<T> data, FlatBufferBuilder builder, PKT_Type id, ServerSession serverSession) where T : struct
+    public byte[] CreatePacketWithAES<T>(Offset<T> data, FlatBufferBuilder builder, PKT_Type id, ServerSession serverSession) where T : struct
     {{
         builder.Finish(data.Value);
         var bytes = builder.SizedByteArray();
